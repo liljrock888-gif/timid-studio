@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timid Studio | Small Name. Big Worlds.</title>
+  <meta name="description" content="Timid Studio makes Discord bots, games, websites and AI video. Add our free bots CoinBot, QuizQuest, Harvest Hollow and PetPals, play Thornwake, or hire us for your project.">
+  <meta property="og:title" content="Timid Studio | Small Name. Big Worlds.">
+  <meta property="og:description" content="Games, Discord bots and digital worlds from an independent studio.">
+  <meta property="og:image" content="img/hero.jpg">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#05060f">
+  <link rel="icon" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05060f;
+      --panel: #0b0f1f;
+      --line: rgba(255, 255, 255, .09);
+      --text: #f4f5ff;
+      --muted: #a3a8c3;
+      --purple: #a970ff;
+      --blue: #3fb6ff;
+      --pink: #ff5fcf;
+      --red: #ff2a45;
+      --gold: #ffc94a;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ---------- animated space background ---------- */
+    .sky {
+      position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(120, 60, 255, .35), transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(30, 140, 255, .25), transparent 40%),
+        radial-gradient(circle at 50% 95%, rgba(255, 40, 120, .18), transparent 45%),
+        var(--bg);
+    }
+    .stars {
+      position: fixed; inset: -50%; z-index: -1; pointer-events: none; opacity: .7;
+      background-image:
+        radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+        radial-gradient(1px 1px at 120px 80px, #cfd8ff, transparent),
+        radial-gradient(1.5px 1.5px at 200px 160px, #fff, transparent),
+        radial-gradient(1px 1px at 300px 40px, #b8c7ff, transparent),
+        radial-gradient(1px 1px at 380px 220px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 60px 260px, #e5d6ff, transparent);
+      background-size: 420px 300px;
+      animation: drift 120s linear infinite;
+    }
+    @keyframes drift { to { transform: translate3d(-420px, -300px, 0); } }
+
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    h1, h2, h3, .logo, .price, .eyebrow { font-family: "Orbitron", "Inter", sans-serif; }
+
+    .grad {
+      background: linear-gradient(90deg, var(--purple), var(--blue), var(--pink), var(--purple));
+      background-size: 300% 100%;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: shimmer 8s ease-in-out infinite;
+    }
+    @keyframes shimmer { 50% { background-position: 100% 0; } }
+
+    /* ---------- nav ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 16px 6%;
+      background: rgba(5, 6, 15, .72);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    .logo { font-size: 20px; font-weight: 900; letter-spacing: 3px; text-decoration: none; white-space: nowrap; }
+    .logo span { color: var(--purple); text-shadow: 0 0 18px rgba(169, 112, 255, .8); }
+    .links { display: flex; align-items: center; gap: 26px; }
+    .links a { color: #cfd2e6; text-decoration: none; font-weight: 500; font-size: 15px; transition: color .2s; }
+    .links a:hover { color: var(--purple); }
+    .nav-cta {
+      padding: 9px 16px; border-radius: 999px; color: #fff !important;
+      background: linear-gradient(90deg, #5865f2, var(--purple));
+      box-shadow: 0 0 18px rgba(88, 101, 242, .55);
+    }
+
+    /* ---------- buttons ---------- */
+    .button {
+      position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 15px 26px; margin: 6px;
+      border-radius: 12px; border: 0;
+      color: #fff; font-weight: 700; text-decoration: none; font-size: 16px;
+      background: linear-gradient(90deg, #6c3bff, var(--purple), #3f8bff);
+      background-size: 200% 100%;
+      box-shadow: 0 0 26px rgba(140, 82, 255, .45);
+      transition: transform .2s, box-shadow .2s, background-position .4s;
+      cursor: pointer;
+    }
+    .button:hover { transform: translateY(-3px); background-position: 100% 0; box-shadow: 0 0 40px rgba(140, 82, 255, .8); }
+    .button.ghost { background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .2); box-shadow: none; }
+    .button.ghost:hover { border-color: var(--purple); box-shadow: 0 0 24px rgba(169, 112, 255, .4); }
+    .button.red { background: linear-gradient(90deg, #087cff, var(--red)); box-shadow: 0 0 26px rgba(255, 42, 69, .45); }
+    .button.discord { background: linear-gradient(90deg, #5865f2, #7b86ff); box-shadow: 0 0 26px rgba(88, 101, 242, .55); }
+    .button:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+
+    /* ---------- hero ---------- */
+    .hero { padding: 70px 6% 40px; display: grid; place-items: center; text-align: center; }
+    .hero-banner {
+      position: relative; width: 100%; max-width: 980px; aspect-ratio: 16 / 7.2;
+      border-radius: 26px; overflow: hidden; margin-bottom: 38px;
+      border: 1px solid rgba(169, 112, 255, .45);
+      box-shadow: 0 0 60px rgba(120, 60, 255, .35), 0 30px 80px rgba(0, 0, 0, .6);
+      animation: floaty 7s ease-in-out infinite;
+    }
+    .hero-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+    .hero-banner::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(5, 6, 15, .85));
+    }
+    @keyframes floaty { 50% { transform: translateY(-8px); } }
+
+    .tag {
+      display: inline-block; padding: 8px 18px; margin-bottom: 22px;
+      border: 1px solid var(--purple); border-radius: 999px;
+      color: #d8c4ff; font-size: 13px; letter-spacing: 3px; font-weight: 700;
+      background: rgba(169, 112, 255, .08);
+    }
+    h1 { font-size: clamp(48px, 10vw, 112px); line-height: .92; font-weight: 900; margin-bottom: 22px; letter-spacing: 2px; }
+    .hero p.lead { color: var(--muted); font-size: clamp(17px, 2vw, 20px); max-width: 640px; margin: 0 auto 30px; }
+
+    .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
+    .stat {
+      padding: 12px 20px; border-radius: 14px;
+      background: rgba(255, 255, 255, .04); border: 1px solid var(--line);
+      font-size: 14px; color: var(--muted);
+    }
+    .stat b { display: block; font-family: "Orbitron", sans-serif; font-size: 22px; color: var(--text); }
+
+    /* ---------- sections ---------- */
+    section { padding: 90px 6%; }
+    .eyebrow { color: var(--blue); font-size: 13px; letter-spacing: 4px; font-weight: 800; margin-bottom: 10px; }
+    .section-title { font-size: clamp(30px, 4.5vw, 46px); line-height: 1.1; margin-bottom: 12px; }
+    .section-subtitle { color: var(--muted); margin-bottom: 40px; max-width: 620px; font-size: 17px; }
+
+    /* ---------- cards ---------- */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .card {
+      position: relative; display: flex; flex-direction: column;
+      background: linear-gradient(160deg, rgba(20, 24, 48, .92), rgba(9, 11, 24, .95));
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 20px; overflow: hidden;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+    }
+    .card::before {
+      content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none;
+      background: linear-gradient(140deg, var(--accent, var(--purple)), transparent 40%, transparent 60%, var(--accent, var(--purple)));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; opacity: .55; transition: opacity .3s;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 18px 50px rgba(0, 0, 0, .5), 0 0 40px color-mix(in srgb, var(--accent, var(--purple)) 35%, transparent); }
+    .card:hover::before { opacity: 1; }
+    .card .art { border-radius: 14px; overflow: hidden; margin-bottom: 18px; background: #000; aspect-ratio: 1 / .78; }
+    .card .art img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .card:hover .art img { transform: scale(1.06); }
+    .card h3 { font-size: 22px; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 15px; }
+    .card .bottom { margin-top: auto; padding-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .card .button { margin: 0; padding: 12px 18px; font-size: 15px; }
+    .price { font-size: 26px; font-weight: 900; color: var(--accent, var(--purple)); text-shadow: 0 0 18px color-mix(in srgb, var(--accent, var(--purple)) 60%, transparent); }
+
+    .status {
+      position: absolute; top: 32px; left: 32px; z-index: 2;
+      padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+      background: rgba(5, 6, 15, .8); border: 1px solid var(--accent, var(--purple)); color: #fff;
+      backdrop-filter: blur(6px);
+    }
+    .status::before { content: "●"; color: #3dff8b; margin-right: 6px; }
+    .status.soon::before { color: var(--gold); }
+
+    .blue { --accent: var(--blue); }
+    .gold { --accent: var(--gold); }
+    .green { --accent: #4dff7a; }
+    .redc { --accent: var(--red); }
+    .white { --accent: #d9dcff; }
+
+    /* ---------- featured game ---------- */
+    .featured {
+      position: relative; border-radius: 28px; overflow: hidden; min-height: 440px;
+      display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 30px;
+      padding: 50px 6%;
+      border: 1px solid rgba(255, 42, 69, .45);
+      box-shadow: 0 0 70px rgba(255, 42, 69, .2), 0 0 40px rgba(8, 124, 255, .2);
+      isolation: isolate;
+    }
+    .featured .bg { position: absolute; inset: 0; z-index: -1; }
+    .featured .bg img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.2); }
+    .featured .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5, 6, 15, .95) 30%, rgba(5, 6, 15, .45)); }
+    .featured .eyebrow { color: var(--red); }
+    .featured h2 { font-size: clamp(38px, 6vw, 70px); line-height: 1; margin-bottom: 16px; letter-spacing: 2px; }
+    .featured p { color: #c9cde3; font-size: 18px; max-width: 520px; margin-bottom: 26px; }
+    .featured .logo-art { justify-self: center; width: min(360px, 80%); border-radius: 22px; overflow: hidden; box-shadow: 0 0 60px rgba(169, 112, 255, .55); animation: floaty 6s ease-in-out infinite; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+    .chip { padding: 7px 14px; border-radius: 999px; font-size: 13px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); }
+
+    /* ---------- premium bot ---------- */
+    .premium {
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 0; border-radius: 28px; overflow: hidden;
+      border: 1px solid rgba(169, 112, 255, .5);
+      background: linear-gradient(160deg, rgba(25, 18, 52, .95), rgba(8, 10, 24, .97));
+      box-shadow: 0 0 60px rgba(169, 112, 255, .22);
+    }
+    .premium .art img { width: 100%; height: 100%; object-fit: cover; min-height: 320px; }
+    .premium .body { padding: 44px; }
+    .premium .price { font-size: 44px; margin: 6px 0 22px; }
+    .premium .price small { font-size: 16px; color: var(--muted); font-family: "Inter", sans-serif; font-weight: 500; text-shadow: none; }
+    .features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; margin-bottom: 28px; }
+    .features li { color: #d7daf0; font-size: 15px; }
+
+    /* ---------- discord band ---------- */
+    .discord-band {
+      display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 30px;
+      padding: 34px 40px; border-radius: 26px;
+      background: linear-gradient(120deg, rgba(88, 101, 242, .22), rgba(10, 14, 32, .9));
+      border: 1px solid rgba(88, 101, 242, .55);
+      box-shadow: 0 0 50px rgba(88, 101, 242, .25);
+    }
+    .discord-band img { width: 150px; border-radius: 18px; }
+    .discord-band h2 { font-size: clamp(24px, 3vw, 34px); margin-bottom: 6px; }
+    .discord-band p { color: var(--muted); }
+
+    /* ---------- about ---------- */
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .about .art { border-radius: 24px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 0 50px rgba(63, 182, 255, .18); }
+    .about p { color: #c4c8de; font-size: 17px; margin-bottom: 16px; }
+    .values { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+
+    footer { padding: 50px 6% 40px; text-align: center; color: #7d82a0; border-top: 1px solid var(--line); }
+    footer .logo { display: inline-block; margin-bottom: 10px; color: var(--text); }
+    footer nav { position: static; background: none; border: 0; justify-content: center; padding: 18px 0; backdrop-filter: none; }
+
+    /* ---------- flying saucer (kept from the original) ---------- */
+    .saucer-flight {
+      position: fixed; top: 0; left: 0; z-index: 15;
+      width: clamp(80px, 11vw, 150px);
+      padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; cursor: pointer;
+      filter: drop-shadow(0 5px 16px rgba(72, 198, 255, .6));
+      animation: saucer-tour 28s ease-in-out infinite; will-change: transform;
+    }
+    .saucer-flight img { width: 100%; height: auto; pointer-events: none; animation: saucer-bob 2.4s ease-in-out infinite alternate; }
+    .saucer-flight.is-paused, .saucer-flight.is-paused img { animation-play-state: paused; }
+    @keyframes saucer-tour {
+      0% { opacity: 0; transform: translate3d(-120%, 14vh, 0) rotate(-8deg); }
+      8% { opacity: 1; }
+      18% { transform: translate3d(12vw, 5vh, 0) rotate(4deg); }
+      34% { transform: translate3d(76vw, 16vh, 0) rotate(10deg); }
+      50% { transform: translate3d(78vw, 68vh, 0) rotate(-5deg); }
+      66% { transform: translate3d(38vw, 82vh, 0) rotate(-10deg); }
+      82% { transform: translate3d(4vw, 55vh, 0) rotate(5deg); }
+      92% { opacity: 1; transform: translate3d(48vw, 25vh, 0) rotate(8deg); }
+      100% { opacity: 0; transform: translate3d(calc(100vw + 120%), 14vh, 0) rotate(14deg); }
+    }
+    @keyframes saucer-bob { from { transform: translateY(0) rotate(-4deg); } to { transform: translateY(-12px) rotate(4deg); } }
+
+    /* ---------- scroll reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+      .featured, .premium, .about { grid-template-columns: 1fr; }
+      .featured .logo-art { order: -1; width: min(240px, 70%); }
+      .discord-band { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+      .premium .body { padding: 30px; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 12px 16px; }
+      .links { gap: 14px; }
+      .links a:not(.nav-cta) { font-size: 13px; }
+      .links .hide-sm { display: none; }
+      .logo { font-size: 16px; letter-spacing: 2px; }
+      section, .hero { padding-left: 16px; padding-right: 16px; }
+      .features { grid-template-columns: 1fr; }
+      .status { top: 30px; left: 30px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      .saucer-flight { left: auto; right: 6vw; top: 14vh; opacity: 1; }
+    }
+
+    /* =====================================================================
+       CYBERPUNK LAYER (neon cyan / magenta / yellow, angular, scanlines)
+       ===================================================================== */
+    :root {
+      --bg: #06060c;
+      --cyan: #00f0ff;
+      --magenta: #ff2bd6;
+      --yellow: #fcee0a;
+      --purple: #b14cff;
+      --blue: var(--cyan);
+      --pink: var(--magenta);
+      --muted: #9aa3bd;
+      --cut: 14px;
+    }
+    body { font-family: "Rajdhani", "Inter", sans-serif; font-size: 18px; letter-spacing: .2px; }
+    .sky {
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255, 43, 214, .22), transparent 38%),
+        radial-gradient(circle at 88% 25%, rgba(0, 240, 255, .18), transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(177, 76, 255, .2), transparent 45%),
+        var(--bg);
+    }
+    /* scanlines + vignette over everything */
+    body::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50;
+      background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 3px);
+      mix-blend-mode: overlay;
+    }
+    .mono, .eyebrow, .tag, .status, .chip, .stat, .nav-cta, .links a { font-family: "Share Tech Mono", monospace; }
+    .grad {
+      background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--yellow), var(--cyan));
+      background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    /* nav */
+    nav { border-bottom: 1px solid rgba(0, 240, 255, .25); box-shadow: 0 1px 0 rgba(255, 43, 214, .25); }
+    .logo span { color: var(--cyan); text-shadow: 0 0 14px rgba(0, 240, 255, .9); }
+    .links a { text-transform: uppercase; letter-spacing: 1.5px; font-size: 14px; }
+    .links a:hover { color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
+    .nav-cta {
+      background: transparent !important; border: 1px solid var(--yellow); color: var(--yellow) !important;
+      border-radius: 0 !important; box-shadow: 0 0 14px rgba(252, 238, 10, .35) !important;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+
+    /* angular neon buttons */
+    .button {
+      border-radius: 0; text-transform: uppercase; letter-spacing: 1.5px; font-family: "Orbitron", sans-serif; font-size: 14px;
+      clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+      background: linear-gradient(90deg, var(--cyan), #00b3ff); color: #021015; box-shadow: none;
+    }
+    .button:hover { box-shadow: none; filter: brightness(1.15) drop-shadow(0 0 12px var(--cyan)); background-position: 0 0; }
+    .button.red { background: linear-gradient(90deg, var(--magenta), #ff4d6d); color: #fff; }
+    .button.red:hover { filter: brightness(1.1) drop-shadow(0 0 12px var(--magenta)); }
+    .button.discord { background: var(--yellow); color: #111; }
+    .button.discord:hover { filter: drop-shadow(0 0 12px var(--yellow)); }
+    .button.ghost { background: rgba(0, 240, 255, .06); border: 1px solid rgba(0, 240, 255, .55); color: var(--cyan); }
+
+    /* hero: perspective grid floor + glitch title */
+    .hero { position: relative; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; left: -50%; right: -50%; bottom: -10%; height: 55%; z-index: -1;
+      background:
+        linear-gradient(rgba(0, 240, 255, .35) 1px, transparent 1px) 0 0 / 60px 60px,
+        linear-gradient(90deg, rgba(255, 43, 214, .3) 1px, transparent 1px) 0 0 / 60px 60px;
+      transform: perspective(500px) rotateX(62deg);
+      mask-image: linear-gradient(transparent, #000 60%); -webkit-mask-image: linear-gradient(transparent, #000 60%);
+      animation: gridmove 6s linear infinite;
+    }
+    @keyframes gridmove { to { background-position: 0 60px, 0 0; } }
+    .hero-banner {
+      border-radius: 0; border: 1px solid rgba(0, 240, 255, .6);
+      clip-path: polygon(28px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%, 0 28px);
+      box-shadow: none; filter: drop-shadow(0 0 30px rgba(0, 240, 255, .25));
+    }
+    .tag { border-radius: 0; border-color: var(--yellow); color: var(--yellow); background: rgba(252, 238, 10, .06); }
+    h1.glitch { position: relative; text-shadow: 3px 0 rgba(255, 43, 214, .55), -3px 0 rgba(0, 240, 255, .55); }
+    h1.glitch .grad { text-shadow: none; }
+    @keyframes glitch {
+      0%, 92%, 100% { transform: none; }
+      93% { transform: translate(-3px, 1px) skewX(-6deg); }
+      95% { transform: translate(3px, -1px) skewX(4deg); }
+      97% { transform: translate(-1px, 0); }
+    }
+    h1.glitch { animation: glitch 5s infinite steps(1); }
+    .stat { border-radius: 0; border-left: 3px solid var(--cyan); background: rgba(0, 240, 255, .05); }
+    .stat:nth-child(2) { border-left-color: var(--magenta); background: rgba(255, 43, 214, .05); }
+    .stat:nth-child(3) { border-left-color: var(--yellow); background: rgba(252, 238, 10, .05); }
+
+    /* sections & cards */
+    .eyebrow { color: var(--cyan); letter-spacing: 3px; font-size: 14px; }
+    .card {
+      border-radius: 0; background: linear-gradient(160deg, rgba(14, 16, 32, .95), rgba(6, 7, 14, .97));
+      clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px);
+    }
+    .card::before { border-radius: 0; }
+    .card::after {
+      content: ""; position: absolute; top: 0; left: 22px; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .card .art { border-radius: 0; clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px); }
+    .card h3 { text-transform: uppercase; letter-spacing: 1px; }
+    .status { border-radius: 0; }
+    .blue { --accent: var(--cyan); } .gold { --accent: var(--yellow); } .green { --accent: #39ff88; }
+    .white { --accent: var(--magenta); } .redc { --accent: var(--magenta); }
+
+    .featured, .premium, .discord-band, .about .art {
+      border-radius: 0;
+      clip-path: polygon(34px 0, 100% 0, 100% calc(100% - 34px), calc(100% - 34px) 100%, 0 100%, 0 34px);
+    }
+    .featured { border-color: rgba(255, 43, 214, .6); }
+    .featured .eyebrow { color: var(--magenta); }
+    .featured .logo-art { border-radius: 0; clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px); }
+    .chip { border-radius: 0; border-color: rgba(0, 240, 255, .35); background: rgba(0, 240, 255, .06); }
+    .premium { border-color: rgba(0, 240, 255, .5); }
+    .discord-band { border-color: rgba(252, 238, 10, .5); background: linear-gradient(120deg, rgba(252, 238, 10, .08), rgba(10, 12, 26, .95)); }
+    .discord-band img { border-radius: 0; }
+    footer { border-top: 1px solid rgba(0, 240, 255, .2); font-family: "Share Tech Mono", monospace; }
+    @media (max-width: 460px) {
+      .links a:not(.nav-cta) { display: none; }
+      .tag { font-size: 11px; letter-spacing: 1.5px; }
+    }
+    @media (prefers-reduced-motion: reduce) { h1.glitch { animation: none; } }
+
+    .cmds { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .cmd { font-family: "Share Tech Mono", monospace; font-size: 13px; padding: 3px 8px; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+    .free { color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+    .contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .contact .card { text-decoration: none; }
+    .contact .icon { font-size: 30px; margin-bottom: 8px; }
+    .contact .val { font-family: "Orbitron", sans-serif; font-size: clamp(16px, 2vw, 20px); color: var(--text); word-break: break-word; margin: 4px 0 6px; }
+    /* ---------- trailers / services / custom bots ---------- */
+    .trailer-one { max-width: 980px; margin: 0 auto; border: 1px solid rgba(0,240,255,.5);
+      clip-path: polygon(26px 0, 100% 0, 100% calc(100% - 26px), calc(100% - 26px) 100%, 0 100%, 0 26px);
+      filter: drop-shadow(0 0 30px rgba(0,240,255,.25)); background: #000; }
+    .trailer-one video { width: 100%; aspect-ratio: 16 / 9; display: block; background: #000; }
+    .trailers { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .trailer { padding: 0; }
+    .trailer video { width: 100%; aspect-ratio: 16 / 9; display: block; background: #000; }
+    .trailer .meta { padding: 16px 20px 20px; }
+    .trailer .meta h3 { font-size: 18px; margin-bottom: 4px; }
+    .trailer .meta p { font-size: 14px; }
+    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .service .icon { font-size: 34px; margin-bottom: 12px; filter: drop-shadow(0 0 10px var(--accent)); }
+    .service ul { list-style: none; margin: 12px 0 0; color: var(--muted); font-size: 15px; }
+    .service ul li::before { content: "▸ "; color: var(--accent); }
+    .custom-bots { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 26px; }
+    .mini { padding: 18px; }
+    .mini h4 { font-family: "Orbitron", sans-serif; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; margin: 6px 0; }
+    .mini p { color: var(--muted); font-size: 15px; line-height: 1.45; }
+    .mini .ico { font-size: 26px; }
+    .subhead { font-family: "Orbitron", sans-serif; font-size: clamp(22px, 3vw, 30px); margin-top: 60px; }
+  </style>
+</head>
+
+<body>
+  <div class="sky"></div>
+  <div class="stars"></div>
+
+  <nav>
+    <a class="logo" href="#top">TIMID <span>STUDIO</span></a>
+    <div class="links">
+      <a href="#projects">Projects</a>
+      <a href="#thornwake" class="hide-sm">Thornwake</a>
+      <a href="#bots">Bots</a>
+      <a href="#services">Services</a>
+      <a href="#trailers" class="hide-sm">Trailer</a>
+      <a href="#contact" class="hide-sm">Contact</a>
+      <a class="nav-cta" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </nav>
+
+  <button class="saucer-flight" type="button" aria-label="Pause flying saucer" aria-pressed="false" title="Pause flying saucer">
+    <img src="img/saucer.png" alt="">
+  </button>
+
+  <header class="hero" id="top">
+    <div class="hero-banner">
+      <img src="img/hero.jpg" alt="Timid Studio: games, bots and projects" fetchpriority="high">
+    </div>
+    <div class="tag">&gt; SYS.ONLINE // INDEPENDENT STUDIO</div>
+    <h1 class="glitch">TIMID<br><span class="grad">STUDIO</span></h1>
+    <p class="lead">Small name. Big worlds. We build games, Discord bots and digital experiences made for online communities.</p>
+    <div>
+      <a class="button" href="#projects">Explore Projects</a>
+      <a class="button red" href="https://thornwake-puce.vercel.app/" target="_blank" rel="noopener">▶ Play Thornwake</a>
+      <a class="button ghost" href="#bots">Discord Bots</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>4</b>Discord bots</div>
+      <div class="stat"><b>1</b>RPG in development</div>
+      <div class="stat"><b>???</b>Secret project</div>
+    </div>
+  </header>
+
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects">
+    <div class="reveal">
+      <div class="eyebrow">// 01_PROJECTS</div>
+      <h2 class="section-title">Our <span class="grad">Bots</span></h2>
+      <p class="section-subtitle">Four Discord bots built to keep servers busy. Free to add, with premium perks you can unlock right inside Discord.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card blue reveal">
+        <span class="status">LIVE</span>
+        <div class="art"><img src="img/coinbot.jpg" alt="CoinBot artwork" loading="lazy"></div>
+        <h3>CoinBot</h3>
+        <p>The economy game for your server: daily coins, work, fishing, slots, heists, a shop and pets that guard your wallet.</p>
+        <div class="cmds"><span class="cmd">/daily</span><span class="cmd">/heist</span><span class="cmd">/shop</span><span class="cmd">/pet</span></div>
+        <div class="bottom"><span class="mono free">FREE · PREMIUM PERKS</span><a class="button" href="https://discord.com/oauth2/authorize?client_id=1564843353168941196" target="_blank" rel="noopener">Add to Discord</a></div>
+      </article>
+      <article class="card gold reveal">
+        <span class="status">LIVE</span>
+        <div class="art"><img src="img/quizquest.jpg" alt="QuizQuest artwork" loading="lazy"></div>
+        <h3>QuizQuest</h3>
+        <p>Trivia for the whole server. Timed questions, streak bonuses, categories, and /race where everyone fights to answer first.</p>
+        <div class="cmds"><span class="cmd">/trivia</span><span class="cmd">/race</span><span class="cmd">/leaderboard</span></div>
+        <div class="bottom"><span class="mono free">FREE · PREMIUM PERKS</span><a class="button" href="https://discord.com/oauth2/authorize?client_id=1564873222544031746" target="_blank" rel="noopener">Add to Discord</a></div>
+      </article>
+      <article class="card gold reveal">
+        <span class="status">LIVE</span>
+        <div class="art"><img src="img/harvesthollow.jpg" alt="Harvest Hollow artwork" loading="lazy"></div>
+        <h3>Harvest Hollow</h3>
+        <p>Run your own farm. Crops grow in real time, market prices change every day, plus fishing and bigger plots.</p>
+        <div class="cmds"><span class="cmd">/plant</span><span class="cmd">/harvest</span><span class="cmd">/market</span></div>
+        <div class="bottom"><span class="mono free">FREE · PREMIUM PERKS</span><a class="button" href="https://discord.com/oauth2/authorize?client_id=1564872384484479138" target="_blank" rel="noopener">Add to Discord</a></div>
+      </article>
+      <article class="card blue reveal">
+        <span class="status">LIVE</span>
+        <div class="art"><img src="img/petpals.jpg" alt="PetPals artwork" loading="lazy"></div>
+        <h3>PetPals</h3>
+        <p>Collect, train and battle pets. Wild encounters, rarities, a fire/water/leaf type triangle and eggs to hatch.</p>
+        <div class="cmds"><span class="cmd">/explore</span><span class="cmd">/battle</span><span class="cmd">/hatch</span></div>
+        <div class="bottom"><span class="mono free">FREE · PREMIUM PERKS</span><a class="button" href="https://discord.com/oauth2/authorize?client_id=1564871754935967824" target="_blank" rel="noopener">Add to Discord</a></div>
+      </article>
+
+      <a class="card white reveal" href="secret-project.html" style="text-decoration:none">
+        <span class="status soon">COMING SOON</span>
+        <div class="art"><img src="img/secret.jpg" alt="A pale hooded spirit with spiral eyes" loading="lazy"></div>
+        <h3>🌌 Secret Project</h3>
+        <p>Something new is being built behind the scenes. Click if you're curious&hellip;</p>
+        <div class="bottom"><span class="price" style="font-size:18px">CLASSIFIED</span><span class="button ghost">Peek →</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= THORNWAKE ================= -->
+  <section id="thornwake" style="padding-top:20px">
+    <div class="featured reveal">
+      <div class="bg"><img src="img/thornwake-bg.jpg" alt="" loading="lazy"></div>
+      <div>
+        <div class="eyebrow">// 02_FEATURED_GAME</div>
+        <h2>THORN<span class="grad">WAKE</span></h2>
+        <p>A dark fantasy RPG built by Timid Studio. Explore cursed ruins, battle what lurks in the thorns, and play it free in your browser while it's being built.</p>
+        <div class="chips">
+          <span class="chip">⚔️ RPG</span><span class="chip">🌐 Plays in browser</span><span class="chip">🛠️ In active development</span>
+        </div>
+        <a class="button red" href="https://thornwake-puce.vercel.app/" target="_blank" rel="noopener">▶ PLAY THORNWAKE</a>
+      </div>
+      <div class="logo-art"><img src="img/thornwake-logo.jpg" alt="Thornwake logo" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ================= BOTS ================= -->
+  <section id="bots">
+    <div class="reveal">
+      <div class="eyebrow">// 03_DISCORD_BOTS</div>
+      <h2 class="section-title">Give your server a reason to <span class="grad">stay active</span></h2>
+      <p class="section-subtitle">Every Timid bot is free to add. Want more? Premium perks (2x rewards, faster cooldowns, exclusive items) unlock with a Discord subscription, right inside the app.</p>
+    </div>
+
+    <div class="premium reveal">
+      <div class="art"><img src="img/premium.jpg" alt="A purple mech surrounded by gold coins" loading="lazy"></div>
+      <div class="body">
+        <h3 style="font-size:28px">Free to Add. Premium in Discord.</h3>
+        <div class="price" style="font-size:30px">$0 <small>to add · upgrade anytime inside Discord</small></div>
+        <ul class="features">
+          <li>🎮 Games &amp; mini-games</li>
+          <li>⚡ XP &amp; leveling</li>
+          <li>🎁 Daily rewards</li>
+          <li>🏆 Leaderboards &amp; ranks</li>
+          <li>⚙️ Custom features</li>
+          <li>🛟 Free setup help</li>
+        </ul>
+        <a class="button" href="#projects">Pick a Bot</a>
+        <a class="button ghost" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Ask a question</a>
+      </div>
+    </div>
+
+    <h3 class="subhead reveal">Need something else? <span class="grad">Custom bots, built to order.</span></h3>
+    <p class="section-subtitle reveal" style="margin:10px 0 0">Tell us what your server needs and we'll build it. Every custom bot is hosted, set up and supported by us.</p>
+    <div class="custom-bots">
+        <div class="card mini blue reveal"><span class="ico">🛡️</span><h4>Moderation</h4><p>Auto-mod, anti-spam, warnings and mod logs that keep your server safe 24/7.</p></div>
+        <div class="card mini gold reveal"><span class="ico">🎫</span><h4>Tickets & Support</h4><p>Private support tickets, transcripts and staff routing for clean help desks.</p></div>
+        <div class="card mini green reveal"><span class="ico">👋</span><h4>Welcome & Verify</h4><p>Custom welcome cards, role pickers and verification to stop raids and bots.</p></div>
+        <div class="card mini white reveal"><span class="ico">🎵</span><h4>Music & Radio</h4><p>Queue songs and run 24/7 radio channels and listening parties.</p></div>
+        <div class="card mini gold reveal"><span class="ico">🎉</span><h4>Giveaways & Events</h4><p>Timed giveaways, event sign-ups, reminders and winner picking.</p></div>
+        <div class="card mini blue reveal"><span class="ico">🤖</span><h4>AI Chat Assistant</h4><p>An AI helper that answers questions, FAQs and onboarding in your server.</p></div>
+        <div class="card mini green reveal"><span class="ico">💰</span><h4>Economy & Shop</h4><p>Server currency, shops, trading and rewards tied to activity.</p></div>
+        <div class="card mini white reveal"><span class="ico">📊</span><h4>Stats & Logs</h4><p>Member counters, activity stats and full audit logs for admins.</p></div>
+    </div>
+    <div class="reveal" style="margin-top:24px"><a class="button discord" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Get a custom bot quote</a></div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services">
+    <div class="reveal">
+      <div class="eyebrow">// 04_SERVICES</div>
+      <h2 class="section-title">We build it <span class="grad">for you</span></h2>
+      <p class="section-subtitle">Need a website, a bot, a game or a content machine? Timid Studio takes on custom projects. Tell us the idea; we'll handle the build.</p>
+    </div>
+    <div class="services">
+      <div class="card service blue reveal">
+        <div class="icon">🌐</div>
+        <h3>Website Development</h3>
+        <ul><li>Business & portfolio sites</li><li>Landing pages & stores</li><li>Fast, mobile-ready, cyber-clean design</li></ul>
+        <div class="bottom"><span class="mono" style="color:var(--muted);font-size:14px">CUSTOM QUOTE</span><a class="button ghost" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Get a quote</a></div>
+      </div>
+      <div class="card service gold reveal">
+        <div class="icon">🤖</div>
+        <h3>Discord Bot Development</h3>
+        <ul><li>Activity, moderation & ticket bots</li><li>AI-powered assistants</li><li>Hosting & setup included</li></ul>
+        <div class="bottom"><span class="mono" style="color:var(--muted);font-size:14px">CUSTOM QUOTE</span><a class="button ghost" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Get a quote</a></div>
+      </div>
+      <div class="card service white reveal">
+        <div class="icon">🎮</div>
+        <h3>Game Development</h3>
+        <ul><li>Browser games like Thornwake</li><li>Game websites & launch pages</li><li>Prototypes & game jams</li></ul>
+        <div class="bottom"><span class="mono" style="color:var(--muted);font-size:14px">CUSTOM QUOTE</span><a class="button ghost" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Get a quote</a></div>
+      </div>
+      <div class="card service green reveal">
+        <div class="icon">🎬</div>
+        <h3>AI Video & YouTube</h3>
+        <ul><li>Faceless YouTube channels on autopilot</li><li>Shorts, TikToks & trailers</li><li>Thumbnails & channel branding</li></ul>
+        <div class="bottom"><span class="mono" style="color:var(--muted);font-size:14px">CUSTOM QUOTE</span><a class="button ghost" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Get a quote</a></div>
+      </div>
+      <div class="card service blue reveal">
+        <div class="icon">📱</div>
+        <h3>App Development</h3>
+        <ul><li>Mobile & web apps</li><li>Dashboards & tools</li><li>From idea to launch</li></ul>
+        <div class="bottom"><span class="mono" style="color:var(--muted);font-size:14px">CUSTOM QUOTE</span><a class="button ghost" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Get a quote</a></div>
+      </div>
+      <div class="card service gold reveal">
+        <div class="icon">🎨</div>
+        <h3>Branding & Design</h3>
+        <ul><li>Logos, banners & profile art</li><li>Social media kits</li><li>Matching style across every platform</li></ul>
+        <div class="bottom"><span class="mono" style="color:var(--muted);font-size:14px">CUSTOM QUOTE</span><a class="button ghost" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Get a quote</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRAILERS ================= -->
+  <section id="trailers" style="padding-top:30px">
+    <div class="reveal">
+      <div class="eyebrow">// 05_TRAILER</div>
+      <h2 class="section-title">Every big world <span class="grad">starts small</span></h2>
+      <p class="section-subtitle">Our story in 30 seconds. Hit play.</p>
+    </div>
+    <div class="trailer-one reveal">
+      <video controls preload="metadata" playsinline poster="trailers/timid-trailer.jpg"><source src="trailers/timid-trailer.mp4" type="video/mp4"></video>
+    </div>
+  </section>
+
+  <!-- ================= DISCORD ================= -->
+  <section style="padding-top:10px">
+    <div class="discord-band reveal">
+      <img src="img/discord.jpg" alt="Glowing Discord logo" loading="lazy">
+      <div>
+        <h2>Join the Timid Studio Discord</h2>
+        <p>Get bot setup help, Thornwake updates and first looks at the secret project.</p>
+      </div>
+      <a class="button discord" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Join Discord</a>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <div class="about reveal">
+      <div>
+        <div class="eyebrow">// 06_ABOUT</div>
+        <h2 class="section-title">Small name. <span class="grad">Big worlds.</span></h2>
+        <p>Timid Studio is an independent creative studio where ideas turn into playable worlds, useful tools and new digital experiences.</p>
+        <p>We make things for online communities: games you can jump into from your browser, Discord bots that keep servers lively, and experiments we can't talk about yet.</p>
+        <div class="values">
+          <span class="chip">🎮 Games</span><span class="chip">🤖 Discord bots</span><span class="chip">📱 Apps</span><span class="chip">✨ Experiments</span>
+        </div>
+      </div>
+      <div class="art"><img src="img/about.jpg" alt="A white and blue mech sketched into life" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="reveal">
+      <div class="eyebrow">// 07_CONTACT</div>
+      <h2 class="section-title">Let's build <span class="grad">something</span></h2>
+      <p class="section-subtitle">Have a project in mind, or need help with a bot? Reach out. We usually reply within 24 hours.</p>
+    </div>
+    <div class="contact">
+      <a class="card blue reveal" href="mailto:joshuarosario84@outlook.com?subject=Timid%20Studio%20inquiry">
+        <div class="icon">✉️</div><span class="mono free">EMAIL</span>
+        <div class="val">joshuarosario84@outlook.com</div>
+        <p>Project quotes, partnerships and business inquiries.</p>
+      </a>
+      <a class="card redc reveal" href="tel:+13322812837">
+        <div class="icon">📞</div><span class="mono free">PHONE / TEXT</span>
+        <div class="val">(332) 281-2837</div>
+        <p>Call or text. Mon to Fri, 10 AM to 6 PM ET.</p>
+      </a>
+      <a class="card gold reveal" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">
+        <div class="icon">💬</div><span class="mono free">DISCORD</span>
+        <div class="val">Timid Studio Server</div>
+        <p>Bot support, setup tickets and community updates.</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <a class="logo" href="#top">TIMID <span>STUDIO</span></a>
+    <div>Small Name. Big Worlds.</div>
+    <nav>
+      <div class="links">
+        <a href="#projects">Projects</a>
+        <a href="https://thornwake-puce.vercel.app/" target="_blank" rel="noopener">Thornwake</a>
+        <a href="#bots">Bots</a>
+        <a href="#services">Services</a>
+        <a href="links.html">Links</a>
+        <a href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Discord</a>
+      </div>
+    </nav>
+    <div style="margin:6px 0 14px"><a href="mailto:joshuarosario84@outlook.com" style="color:var(--cyan);text-decoration:none">joshuarosario84@outlook.com</a> · <a href="tel:+13322812837" style="color:var(--cyan);text-decoration:none">(332) 281-2837</a></div>
+    <div>© 2026 Timid Studio</div>
+  </footer>
+
+  <script>
+    // flying saucer pause/resume (kept from the original)
+    const saucerButton = document.querySelector(".saucer-flight");
+    saucerButton.addEventListener("click", () => {
+      const isPaused = saucerButton.classList.toggle("is-paused");
+      const action = isPaused ? "Resume" : "Pause";
+      saucerButton.setAttribute("aria-label", `${action} flying saucer`);
+      saucerButton.setAttribute("aria-pressed", String(isPaused));
+      saucerButton.title = `${action} flying saucer`;
+    });
+
+    // reveal sections as they scroll into view
+    const io = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 }) : null;
+    document.querySelectorAll(".reveal").forEach((el) => io ? io.observe(el) : el.classList.add("in"));
+  </script>
+</body>
+</html>

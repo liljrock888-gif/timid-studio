@@ -1,0 +1,6 @@
+# originals (the site uses the optimized copies in img/)
+/*.png
+.DS_Store
+*.code-workspace
+make_trailer.py
+trailers/_*

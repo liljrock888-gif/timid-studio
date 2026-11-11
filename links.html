@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timid Studio | Links</title>
+  <meta name="description" content="All Timid Studio links in one place: website, Discord bots, games, YouTube channels and socials.">
+  <meta property="og:title" content="Timid Studio | Links">
+  <meta property="og:description" content="Bots, games, channels and socials. Everything Timid Studio in one place.">
+  <meta property="og:image" content="img/hero.jpg">
+  <meta name="theme-color" content="#06060c">
+  <link rel="icon" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #06060c; --cyan: #00f0ff; --magenta: #ff2bd6; --yellow: #fcee0a; --text: #eef2ff; --muted: #9aa3bd; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh; color: var(--text); font-family: "Rajdhani", Arial, sans-serif; font-size: 18px;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(255, 43, 214, .25), transparent 40%),
+        radial-gradient(circle at 90% 30%, rgba(0, 240, 255, .18), transparent 40%),
+        var(--bg);
+      display: flex; justify-content: center; padding: 48px 16px 60px;
+    }
+    body::after { content: ""; position: fixed; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px); }
+    .grid-floor { position: fixed; left: -50%; right: -50%; bottom: -5%; height: 40%; z-index: -1;
+      background: linear-gradient(rgba(0,240,255,.25) 1px, transparent 1px) 0 0/50px 50px, linear-gradient(90deg, rgba(255,43,214,.22) 1px, transparent 1px) 0 0/50px 50px;
+      transform: perspective(400px) rotateX(62deg); -webkit-mask-image: linear-gradient(transparent, #000 70%); mask-image: linear-gradient(transparent, #000 70%);
+      animation: move 5s linear infinite; }
+    @keyframes move { to { background-position: 0 50px, 0 0; } }
+    main { width: 100%; max-width: 520px; text-align: center; }
+    .avatar { width: 108px; height: 108px; margin: 0 auto 16px; border: 2px solid var(--cyan); overflow: hidden;
+      clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+      filter: drop-shadow(0 0 18px rgba(0,240,255,.5)); }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    h1 { font-family: "Orbitron", sans-serif; font-weight: 900; font-size: 30px; letter-spacing: 3px; }
+    h1 span { color: var(--cyan); text-shadow: 0 0 14px var(--cyan); }
+    .bio { color: var(--muted); margin: 6px 0 4px; }
+    .tagline { font-family: "Share Tech Mono", monospace; color: var(--yellow); font-size: 13px; letter-spacing: 2px; margin-bottom: 26px; }
+    .group { font-family: "Share Tech Mono", monospace; text-align: left; color: var(--cyan); font-size: 13px; letter-spacing: 3px; margin: 26px 4px 10px; }
+    a.link {
+      position: relative; display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text);
+      padding: 14px 18px; margin-bottom: 12px; background: rgba(14, 16, 32, .9); border: 1px solid rgba(0, 240, 255, .35);
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+      transition: transform .15s, border-color .2s, background .2s;
+    }
+    a.link:hover { transform: translateX(4px); border-color: var(--accent, var(--cyan)); background: rgba(0, 240, 255, .08); }
+    a.link:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    a.link .ico { font-size: 24px; width: 32px; text-align: center; filter: drop-shadow(0 0 8px var(--accent, var(--cyan))); }
+    a.link .txt { flex: 1; text-align: left; line-height: 1.25; }
+    a.link b { display: block; font-size: 19px; font-weight: 700; }
+    a.link small { color: var(--muted); font-size: 15px; }
+    a.link .go { font-family: "Share Tech Mono", monospace; color: var(--accent, var(--cyan)); }
+    a.link.featured { border-color: var(--yellow); --accent: var(--yellow); background: linear-gradient(90deg, rgba(252,238,10,.12), rgba(14,16,32,.9)); }
+    .mag { --accent: var(--magenta); } .yel { --accent: var(--yellow); }
+    footer { margin-top: 30px; color: #6e7491; font-family: "Share Tech Mono", monospace; font-size: 13px; }
+    footer a { color: var(--cyan); text-decoration: none; }
+    @media (prefers-reduced-motion: reduce) { .grid-floor { animation: none; } }
+  </style>
+</head>
+<body>
+  <div class="grid-floor"></div>
+  <main>
+    <div class="avatar"><img src="img/favicon.png" alt="Timid Studio"></div>
+    <h1>TIMID <span>STUDIO</span></h1>
+    <p class="bio">Discord bots, games, websites &amp; AI video.</p>
+    <p class="tagline">// SMALL NAME. BIG WORLDS.</p>
+
+    <!-- ============================================================
+         HOW TO EDIT: each button is one <a class="link"> block.
+         Copy a block, change the href (link), icon, and text. Delete a block to remove it.
+         ============================================================ -->
+
+    <a class="link featured" href="index.html">
+      <span class="ico">🌐</span><span class="txt"><b>Official Website</b><small>Everything Timid Studio</small></span><span class="go">→</span>
+    </a>
+    <a class="link mag" href="index.html#trailers">
+      <span class="ico">🎬</span><span class="txt"><b>Watch the Trailer</b><small>Every big world starts small</small></span><span class="go">▶</span>
+    </a>
+    <a class="link yel" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">
+      <span class="ico">💬</span><span class="txt"><b>Join the Discord</b><small>Support, updates &amp; community</small></span><span class="go">→</span>
+    </a>
+
+    <div class="group">// DISCORD BOTS (FREE)</div>
+    <a class="link" href="https://discord.com/oauth2/authorize?client_id=1564843353168941196" target="_blank" rel="noopener">
+      <span class="ico">💰</span><span class="txt"><b>CoinBot</b><small>Economy game: coins, heists, pets</small></span><span class="go">+ ADD</span>
+    </a>
+    <a class="link yel" href="https://discord.com/oauth2/authorize?client_id=1564873222544031746" target="_blank" rel="noopener">
+      <span class="ico">❓</span><span class="txt"><b>QuizQuest</b><small>Trivia races for your server</small></span><span class="go">+ ADD</span>
+    </a>
+    <a class="link yel" href="https://discord.com/oauth2/authorize?client_id=1564872384484479138" target="_blank" rel="noopener">
+      <span class="ico">🌾</span><span class="txt"><b>Harvest Hollow</b><small>Real-time farming game</small></span><span class="go">+ ADD</span>
+    </a>
+    <a class="link" href="https://discord.com/oauth2/authorize?client_id=1564871754935967824" target="_blank" rel="noopener">
+      <span class="ico">🐾</span><span class="txt"><b>PetPals</b><small>Collect, train &amp; battle pets</small></span><span class="go">+ ADD</span>
+    </a>
+
+    <div class="group">// GAMES</div>
+    <a class="link mag" href="https://thornwake-puce.vercel.app/" target="_blank" rel="noopener">
+      <span class="ico">⚔️</span><span class="txt"><b>Play Thornwake</b><small>Dark fantasy RPG, free in your browser</small></span><span class="go">▶</span>
+    </a>
+
+    <div class="group">// YOUTUBE</div>
+    <a class="link" href="https://www.youtube.com/@GoodBrainTop10" target="_blank" rel="noopener">
+      <span class="ico">🧠</span><span class="txt"><b>Good Brain</b><small>Top 10s that break your brain</small></span><span class="go">→</span>
+    </a>
+    <a class="link mag" href="https://www.youtube.com/@CursedLoreStories" target="_blank" rel="noopener">
+      <span class="ico">👁️</span><span class="txt"><b>Cursed Lore</b><small>True legends, told in the dark</small></span><span class="go">→</span>
+    </a>
+
+    <div class="group">// SOCIALS</div>
+    <a class="link mag" href="https://www.tiktok.com/@cursedlorestories" target="_blank" rel="noopener">
+      <span class="ico">🎵</span><span class="txt"><b>TikTok</b><small>@cursedlorestories</small></span><span class="go">→</span>
+    </a>
+    <!-- ADD MORE SOCIALS HERE: copy the TikTok block above, e.g.
+    <a class="link" href="https://instagram.com/YOURNAME" target="_blank" rel="noopener">
+      <span class="ico">📸</span><span class="txt"><b>Instagram</b><small>@YOURNAME</small></span><span class="go">→</span>
+    </a>
+    -->
+
+    <div class="group">// WORK WITH US</div>
+    <a class="link" href="index.html#services">
+      <span class="ico">🛠️</span><span class="txt"><b>Hire Timid Studio</b><small>Websites, custom bots, games, AI video</small></span><span class="go">→</span>
+    </a>
+    <a class="link yel" href="mailto:joshuarosario84@outlook.com?subject=Timid%20Studio%20inquiry">
+      <span class="ico">✉️</span><span class="txt"><b>Email</b><small>joshuarosario84@outlook.com</small></span><span class="go">→</span>
+    </a>
+    <a class="link" href="tel:+13322812837">
+      <span class="ico">📞</span><span class="txt"><b>Call / Text</b><small>(332) 281-2837</small></span><span class="go">→</span>
+    </a>
+
+    <footer>© 2026 Timid Studio · <a href="index.html">timid studio</a></footer>
+  </main>
+</body>
+</html>
