@@ -55,6 +55,23 @@
     a.link .go { font-family: "Share Tech Mono", monospace; color: var(--accent, var(--cyan)); }
     a.link.featured { border-color: var(--yellow); --accent: var(--yellow); background: linear-gradient(90deg, rgba(252,238,10,.12), rgba(14,16,32,.9)); }
     .mag { --accent: var(--magenta); } .yel { --accent: var(--yellow); }
+    .bot { position: relative; display: flex; align-items: center; gap: 14px; padding: 12px 14px 12px 18px; margin-bottom: 12px;
+      background: rgba(14, 16, 32, .9); border: 1px solid rgba(0, 240, 255, .35); transition: border-color .2s, background .2s;
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); }
+    .bot:hover { border-color: var(--accent, var(--cyan)); background: rgba(0, 240, 255, .06); }
+    .bot .ico { font-size: 24px; width: 32px; text-align: center; filter: drop-shadow(0 0 8px var(--accent, var(--cyan))); }
+    .bot .txt { flex: 1; min-width: 0; text-align: left; line-height: 1.25; }
+    .bot b { display: block; font-size: 19px; font-weight: 700; }
+    .bot small { color: var(--muted); font-size: 15px; }
+    .bot .acts { display: flex; flex-direction: column; gap: 6px; }
+    .act { font-family: "Share Tech Mono", monospace; font-size: 12px; letter-spacing: 1px; text-decoration: none; text-align: center; white-space: nowrap;
+      padding: 6px 10px; color: var(--bg); background: var(--accent, var(--cyan)); border: 1px solid var(--accent, var(--cyan)); transition: filter .15s, background .15s, color .15s; }
+    .act:hover { filter: brightness(1.15); }
+    .act.ghost { color: var(--accent, var(--cyan)); background: transparent; }
+    .act.ghost:hover { background: rgba(0, 240, 255, .1); }
+    .act:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+    .bot.yel { --accent: var(--yellow); }
+    .note { font-family: "Share Tech Mono", monospace; text-align: left; color: var(--muted); font-size: 12px; margin: -2px 4px 10px; }
     footer { margin-top: 30px; color: #6e7491; font-family: "Share Tech Mono", monospace; font-size: 13px; }
     footer a { color: var(--cyan); text-decoration: none; }
     @media (prefers-reduced-motion: reduce) { .grid-floor { animation: none; } }
@@ -84,18 +101,35 @@
     </a>
 
     <div class="group">// DISCORD BOTS (FREE)</div>
-    <a class="link" href="https://discord.com/oauth2/authorize?client_id=1564843353168941196" target="_blank" rel="noopener">
-      <span class="ico">💰</span><span class="txt"><b>CoinBot</b><small>Economy game: coins, heists, pets</small></span><span class="go">+ ADD</span>
-    </a>
-    <a class="link yel" href="https://discord.com/oauth2/authorize?client_id=1564873222544031746" target="_blank" rel="noopener">
-      <span class="ico">❓</span><span class="txt"><b>QuizQuest</b><small>Trivia races for your server</small></span><span class="go">+ ADD</span>
-    </a>
-    <a class="link yel" href="https://discord.com/oauth2/authorize?client_id=1564872384484479138" target="_blank" rel="noopener">
-      <span class="ico">🌾</span><span class="txt"><b>Harvest Hollow</b><small>Real-time farming game</small></span><span class="go">+ ADD</span>
-    </a>
-    <a class="link" href="https://discord.com/oauth2/authorize?client_id=1564871754935967824" target="_blank" rel="noopener">
-      <span class="ico">🐾</span><span class="txt"><b>PetPals</b><small>Collect, train &amp; battle pets</small></span><span class="go">+ ADD</span>
-    </a>
+    <p class="note">Add to your server, or vote for us on top.gg ★</p>
+    <div class="bot">
+      <span class="ico">💰</span><span class="txt"><b>CoinBot</b><small>Economy game: coins, heists, pets</small></span>
+      <span class="acts">
+        <a class="act" href="https://discord.com/oauth2/authorize?client_id=1564843353168941196" target="_blank" rel="noopener" aria-label="Add CoinBot to Discord">+ ADD</a>
+        <a class="act ghost" href="https://top.gg/bot/1564843353168941196" target="_blank" rel="noopener" aria-label="CoinBot on top.gg">top.gg ↗</a>
+      </span>
+    </div>
+    <div class="bot yel">
+      <span class="ico">❓</span><span class="txt"><b>QuizQuest</b><small>Trivia races for your server</small></span>
+      <span class="acts">
+        <a class="act" href="https://discord.com/oauth2/authorize?client_id=1564873222544031746" target="_blank" rel="noopener" aria-label="Add QuizQuest to Discord">+ ADD</a>
+        <a class="act ghost" href="https://top.gg/bot/1564873222544031746" target="_blank" rel="noopener" aria-label="QuizQuest on top.gg">top.gg ↗</a>
+      </span>
+    </div>
+    <div class="bot yel">
+      <span class="ico">🌾</span><span class="txt"><b>Harvest Hollow</b><small>Real-time farming game</small></span>
+      <span class="acts">
+        <a class="act" href="https://discord.com/oauth2/authorize?client_id=1564872384484479138" target="_blank" rel="noopener" aria-label="Add Harvest Hollow to Discord">+ ADD</a>
+        <a class="act ghost" href="https://top.gg/bot/1564872384484479138" target="_blank" rel="noopener" aria-label="Harvest Hollow on top.gg">top.gg ↗</a>
+      </span>
+    </div>
+    <div class="bot">
+      <span class="ico">🐾</span><span class="txt"><b>PetPals</b><small>Collect, train &amp; battle pets</small></span>
+      <span class="acts">
+        <a class="act" href="https://discord.com/oauth2/authorize?client_id=1564871754935967824" target="_blank" rel="noopener" aria-label="Add PetPals to Discord">+ ADD</a>
+        <a class="act ghost" href="https://top.gg/bot/1564871754935967824" target="_blank" rel="noopener" aria-label="PetPals on top.gg">top.gg ↗</a>
+      </span>
+    </div>
 
     <div class="group">// APPS</div>
     <a class="link mag" href="https://github.com/liljrock888-gif/timid-studio/releases/download/simpatico-v1.0.1/Simpatico-1.0.1.apk" rel="noopener">
