@@ -428,6 +428,9 @@
 
     .cmds { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
     .cmd { font-family: "Share Tech Mono", monospace; font-size: 13px; padding: 3px 8px; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+    button.cmd.copy-ip { cursor: pointer; text-align: left; max-width: 100%; overflow-wrap: anywhere; transition: background .15s; }
+    button.cmd.copy-ip:hover { background: color-mix(in srgb, var(--accent) 20%, transparent); }
+    button.cmd.copy-ip:focus-visible { outline: 2px solid var(--yellow, #fcee0a); outline-offset: 2px; }
     .free { color: var(--muted); font-size: 13px; letter-spacing: 1px; }
     .contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
     .contact .card { text-decoration: none; }
@@ -547,6 +550,18 @@
         <p>A free music app. Stream 600,000+ free songs, search any artist with previews, build playlists, and keep listening across the whole app.</p>
         <div class="cmds"><span class="cmd">Browse</span><span class="cmd">Search</span><span class="cmd">Playlists</span></div>
         <div class="bottom"><span class="mono free">FREE · ANDROID</span><a class="button" href="https://github.com/liljrock888-gif/timid-studio/releases/download/simpatico-v1.0.1/Simpatico-1.0.1.apk" rel="noopener">Download APK</a></div>
+      </article>
+
+      <article class="card blue reveal">
+        <span class="status">NEW · MINECRAFT SERVER</span>
+        <div class="art"><img src="img/foreigners.jpg" alt="A neon block island with a glowing beacon" loading="lazy"></div>
+        <h3>The Foreigners' Server</h3>
+        <p>Our Minecraft server. PC, phone and console players all play together in one survival world. Copy an address below to join.</p>
+        <div class="cmds">
+          <button type="button" class="cmd copy-ip" data-copy="impairment-djibouti.tun.ply.gg">Java: impairment-djibouti.tun.ply.gg</button>
+          <button type="button" class="cmd copy-ip" data-copy="impairment-walsh.tun.ply.gg:26416">Bedrock: impairment-walsh.tun.ply.gg · 26416</button>
+        </div>
+        <div class="bottom"><span class="mono free">FREE · JAVA + BEDROCK</span><a class="button" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Join the Discord</a></div>
       </article>
 
       <a class="card white reveal" href="secret-project.html" style="text-decoration:none">
@@ -756,6 +771,16 @@
       saucerButton.setAttribute("aria-label", `${action} flying saucer`);
       saucerButton.setAttribute("aria-pressed", String(isPaused));
       saucerButton.title = `${action} flying saucer`;
+    });
+
+    // Minecraft server: tap an address to copy it
+    document.querySelectorAll(".copy-ip").forEach((btn) => {
+      const label = btn.textContent;
+      btn.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(btn.dataset.copy); btn.textContent = "✓ Copied!"; }
+        catch { btn.textContent = btn.dataset.copy; }
+        setTimeout(() => { btn.textContent = label; }, 1600);
+      });
     });
 
     // reveal sections as they scroll into view
