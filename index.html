@@ -213,6 +213,12 @@
     .featured h2 { font-size: clamp(38px, 6vw, 70px); line-height: 1; margin-bottom: 16px; letter-spacing: 2px; }
     .featured p { color: #c9cde3; font-size: 18px; max-width: 520px; margin-bottom: 26px; }
     .featured .logo-art { justify-self: center; width: min(360px, 80%); border-radius: 22px; overflow: hidden; box-shadow: 0 0 60px rgba(169, 112, 255, .55); animation: floaty 6s ease-in-out infinite; }
+    .grid.g { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    .group-head { margin: 56px 0 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(0, 240, 255, .25); }
+    .proj-nav { margin: 22px 0 0; }
+    .proj-nav .chip { color: inherit; text-decoration: none; font-weight: 600; transition: .2s; }
+    .proj-nav .chip:hover { border-color: rgba(0, 240, 255, .8); background: rgba(0, 240, 255, .14); }
+    [id^="p-"], #commissions { scroll-margin-top: 90px; }
     .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
     .chip { padding: 7px 14px; border-radius: 999px; font-size: 13px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); }
 
@@ -471,6 +477,7 @@
       <a href="#thornwake" class="hide-sm">Thornwake</a>
       <a href="#bots">Bots</a>
       <a href="#services">Services</a>
+      <a href="#commissions">Commissions</a>
       <a href="#trailers" class="hide-sm">Trailer</a>
       <a href="#contact" class="hide-sm">Contact</a>
       <a class="nav-cta" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Discord</a>
@@ -495,9 +502,9 @@
     </div>
     <div class="stats">
       <div class="stat"><b>4</b>Discord bots</div>
-      <div class="stat"><b>1</b>RPG in development</div>
+      <div class="stat"><b>2</b>Games</div>
       <div class="stat"><b>1</b>Music app</div>
-      <div class="stat"><b>???</b>Secret project</div>
+      <div class="stat"><b>2</b>YouTube channels</div>
     </div>
   </header>
 
@@ -505,11 +512,18 @@
   <section id="projects">
     <div class="reveal">
       <div class="eyebrow">// 01_PROJECTS</div>
-      <h2 class="section-title">Our <span class="grad">Bots</span></h2>
-      <p class="section-subtitle">Four Discord bots built to keep servers busy. Free to add, with premium perks you can unlock right inside Discord.</p>
+      <h2 class="section-title">Things we've <span class="grad">built</span></h2>
+      <p class="section-subtitle">Everything Timid Studio has made, sorted by type: Discord bots, games, YouTube channels, apps and servers.</p>
+      <div class="chips proj-nav">
+        <a class="chip" href="#p-bots">🤖 Discord Bots · 4</a>
+        <a class="chip" href="#p-games">🎮 Games · 2</a>
+        <a class="chip" href="#p-youtube">🎬 YouTube · 2</a>
+        <a class="chip" href="#p-apps">📱 Apps &amp; Servers · 2</a>
+      </div>
     </div>
 
-    <div class="grid">
+    <h3 class="subhead group-head reveal" id="p-bots">🤖 Discord Bots</h3>
+    <div class="grid g">
       <article class="card blue reveal">
         <span class="status">LIVE</span>
         <div class="art"><img src="img/coinbot.jpg" alt="CoinBot artwork" loading="lazy"></div>
@@ -542,7 +556,50 @@
         <div class="cmds"><span class="cmd">/explore</span><span class="cmd">/battle</span><span class="cmd">/hatch</span></div>
         <div class="bottom"><span class="mono free">FREE · PREMIUM PERKS</span><a class="button" href="https://discord.com/oauth2/authorize?client_id=1564871754935967824" target="_blank" rel="noopener">Add to Discord</a></div>
       </article>
+    </div>
 
+    <h3 class="subhead group-head reveal" id="p-games">🎮 Games</h3>
+    <div class="grid g">
+      <article class="card redc reveal">
+        <span class="status">PLAYABLE · IN DEVELOPMENT</span>
+        <div class="art"><img src="img/thornwake-logo.jpg" alt="Thornwake logo" loading="lazy"></div>
+        <h3>Thornwake</h3>
+        <p>A dark fantasy RPG. Explore cursed ruins and battle what lurks in the thorns, free in your browser.</p>
+        <div class="cmds"><span class="cmd">RPG</span><span class="cmd">Browser</span></div>
+        <div class="bottom"><span class="mono free">FREE · BROWSER</span><a class="button red" href="https://thornwake-puce.vercel.app/" target="_blank" rel="noopener">▶ Play</a></div>
+      </article>
+      <article class="card gold reveal">
+        <span class="status">LIVE · ROBLOX</span>
+        <div class="art"><img src="img/brainrot.jpg" alt="Brainrot Mansion Tycoon thumbnail with a castle and brainrot characters" loading="lazy"></div>
+        <h3>Brainrot Mansion Tycoon</h3>
+        <p>A Roblox idle tycoon. Build mansions, collect brainrot cards and get rich.</p>
+        <div class="cmds"><span class="cmd">Tycoon</span><span class="cmd">Idle</span><span class="cmd">Collect</span></div>
+        <div class="bottom"><span class="mono free">FREE · ROBLOX</span><a class="button" href="https://www.roblox.com/games/82185756640432" target="_blank" rel="noopener">Play on Roblox</a></div>
+      </article>
+    </div>
+
+    <h3 class="subhead group-head reveal" id="p-youtube">🎬 YouTube Channels</h3>
+    <div class="grid g">
+      <article class="card blue reveal">
+        <span class="status">LIVE · NEW VIDEOS WEEKLY</span>
+        <div class="art"><img src="img/goodbrain.jpg" alt="Good Brain channel banner" loading="lazy"></div>
+        <h3>Good Brain</h3>
+        <p>Top 10s that break your brain: weird animals, unsolved mysteries, space facts, plus daily Shorts.</p>
+        <div class="cmds"><span class="cmd">Top 10s</span><span class="cmd">Shorts</span></div>
+        <div class="bottom"><span class="mono free">FREE · YOUTUBE</span><a class="button" href="https://www.youtube.com/@GoodBrainTop10" target="_blank" rel="noopener">Watch</a></div>
+      </article>
+      <article class="card redc reveal">
+        <span class="status">LIVE · MON · WED · FRI</span>
+        <div class="art"><img src="img/cursedlore.jpg" alt="Cursed Lore channel banner with a red eye" loading="lazy"></div>
+        <h3>Cursed Lore</h3>
+        <p>Dark true legends told in the dark: the Pied Piper, Black Shuck, the Bell Witch and more.</p>
+        <div class="cmds"><span class="cmd">Legends</span><span class="cmd">Storytime</span></div>
+        <div class="bottom"><span class="mono free">FREE · YOUTUBE</span><a class="button" href="https://www.youtube.com/@CursedLoreStories" target="_blank" rel="noopener">Watch</a></div>
+      </article>
+    </div>
+
+    <h3 class="subhead group-head reveal" id="p-apps">📱 Apps &amp; Servers</h3>
+    <div class="grid g">
       <article class="card redc reveal">
         <span class="status">NEW · ANDROID APP</span>
         <div class="art"><img src="img/simpatico.jpg" alt="Simpatico music app icon" loading="lazy"></div>
@@ -551,7 +608,6 @@
         <div class="cmds"><span class="cmd">Browse</span><span class="cmd">Search</span><span class="cmd">Playlists</span></div>
         <div class="bottom"><span class="mono free">FREE · ANDROID</span><a class="button" href="https://github.com/liljrock888-gif/timid-studio/releases/download/simpatico-v1.0.1/Simpatico-1.0.1.apk" rel="noopener">Download APK</a></div>
       </article>
-
       <article class="card blue reveal">
         <span class="status">NEW · MINECRAFT SERVER</span>
         <div class="art"><img src="img/foreigners.jpg" alt="A neon block island with a glowing beacon" loading="lazy"></div>
@@ -563,14 +619,6 @@
         </div>
         <div class="bottom"><span class="mono free">FREE · JAVA + BEDROCK</span><a class="button" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Join the Discord</a></div>
       </article>
-
-      <a class="card white reveal" href="secret-project.html" style="text-decoration:none">
-        <span class="status soon">COMING SOON</span>
-        <div class="art"><img src="img/secret.jpg" alt="A pale hooded spirit with spiral eyes" loading="lazy"></div>
-        <h3>🌌 Secret Project</h3>
-        <p>Something new is being built behind the scenes. Click if you're curious&hellip;</p>
-        <div class="bottom"><span class="price" style="font-size:18px">CLASSIFIED</span><span class="button ghost">Peek →</span></div>
-      </a>
     </div>
   </section>
 
@@ -678,9 +726,15 @@
       </div>
     </div>
 
-    <!-- client work -->
-    <h3 class="subhead reveal" id="work">Client work: <span class="grad">built for real people.</span></h3>
-    <p class="section-subtitle reveal" style="margin:10px 0 24px">Commissions we've designed and built for clients, from the first idea to a finished site.</p>
+  </section>
+
+  <!-- ================= COMMISSIONS ================= -->
+  <section id="commissions">
+    <div class="reveal">
+      <div class="eyebrow">// 05_COMMISSIONS</div>
+      <h2 class="section-title">Client <span class="grad">commissions</span></h2>
+      <p class="section-subtitle" style="margin-bottom:28px">Work we've designed and built for clients, from the first idea to a finished product. Want one? Get a quote on Discord.</p>
+    </div>
     <div class="premium reveal" style="border-color:rgba(255,95,168,.55);box-shadow:0 0 60px rgba(255,95,168,.2)">
       <a class="art" href="work/richofyarn/" target="_blank" rel="noopener"><img src="img/richofyarn.jpg" style="object-position:top" alt="Richofyarn website homepage with pink rock-style title and chocolate drip header" loading="lazy"></a>
       <div class="body">
@@ -704,7 +758,7 @@
   <!-- ================= TRAILERS ================= -->
   <section id="trailers" style="padding-top:30px">
     <div class="reveal">
-      <div class="eyebrow">// 05_TRAILER</div>
+      <div class="eyebrow">// 06_TRAILER</div>
       <h2 class="section-title">Every big world <span class="grad">starts small</span></h2>
       <p class="section-subtitle">Our story in 30 seconds. Hit play.</p>
     </div>
@@ -719,7 +773,7 @@
       <img src="img/discord.jpg" alt="Glowing Discord logo" loading="lazy">
       <div>
         <h2>Join the Timid Studio Discord</h2>
-        <p>Get bot setup help, Thornwake updates and first looks at the secret project.</p>
+        <p>Get bot setup help, Thornwake updates and first looks at new projects.</p>
       </div>
       <a class="button discord" href="https://discord.gg/S8bdA6CJUC" target="_blank" rel="noopener">Join Discord</a>
     </div>
@@ -729,7 +783,7 @@
   <section id="about">
     <div class="about reveal">
       <div>
-        <div class="eyebrow">// 06_ABOUT</div>
+        <div class="eyebrow">// 07_ABOUT</div>
         <h2 class="section-title">Small name. <span class="grad">Big worlds.</span></h2>
         <p>Timid Studio is an independent creative studio where ideas turn into playable worlds, useful tools and new digital experiences.</p>
         <p>We make things for online communities: games you can jump into from your browser, Discord bots that keep servers lively, and experiments we can't talk about yet.</p>
@@ -744,7 +798,7 @@
   <!-- ================= CONTACT ================= -->
   <section id="contact">
     <div class="reveal">
-      <div class="eyebrow">// 07_CONTACT</div>
+      <div class="eyebrow">// 08_CONTACT</div>
       <h2 class="section-title">Let's build <span class="grad">something</span></h2>
       <p class="section-subtitle">Have a project in mind, or need help with a bot? Reach out. We usually reply within 24 hours.</p>
     </div>
